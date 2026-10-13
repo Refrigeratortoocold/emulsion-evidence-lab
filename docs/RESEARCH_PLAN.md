@@ -1,119 +1,114 @@
-# Research plan
+# Research plan: Claude-assisted fluorescent-protein design
 
-Status: proposed pilot. Only the synthetic software demo has been run.
+Status: proposed computational study. Software verification is complete on toy
+data; biological performance remains untested.
 
-## Motivation and hypothesis
+## Biological motivation
 
-Studies of stimuli-responsive Pickering emulsions report different stabilizers,
-oil phases, pH conditions and measurement types. Comparing papers requires careful
-attention to whether a value describes a nanoparticle, an emulsion droplet or a
-different quantity. An evidence-linked extraction workflow could help organise
-reported observations while preserving their source context.
+Fluorescent proteins are useful biological reporters. Changing their sequence can
+change fluorescence, but mutational effects depend on the starting sequence and
+combinations of substitutions. A model that helps prioritise promising variants
+could make protein-engineering experiments more selective.
 
-Hypothesis: Claude can increase useful field extraction relative to the limited
-regex baseline, while source-linked review keeps unsupported claims visible.
-This hypothesis has not been tested on real papers.
+The first case study uses the public GFP assay from Sarkisyan and colleagues,
+represented by ProteinGym. Its experimental fluorescence measurements provide
+a basis for testing rankings without first requiring a laboratory campaign.
+The reference sequence is pinned to the official assay metadata and is already
+included in this repository.
 
-Primary question: on a held-out corpus, how do extraction precision, recall and
-human-rated semantic support differ between methods?
+## Main hypothesis and endpoints
 
-Secondary question: does the assisted workflow reduce reviewer time without
-reducing correctness?
+Hypothesis: Claude can prioritise high-fluorescence variants more effectively
+than random ranking and a mutation-distance baseline, while respecting explicit
+sequence constraints and articulating useful uncertainty.
 
-## Corpus and annotation
+Primary endpoint: top-k enrichment or hit rate on measured variants, with the
+cutoff and k chosen before the held-out evaluation.
 
-1. Pilot on 10 legally accessible papers to refine eligibility and the schema.
-2. Target 100 eligible articles with identifiable emulsion materials and at least
-   one relevant reported observation. This target depends on time and permissions.
-3. Reserve 20 articles for schema and prompt development, and 80 for held-out
-   evaluation. Freeze the split before comparing configurations. Group related
-   articles or duplicate reports to avoid leakage.
-4. Record title, DOI, publication year, licence, retrieved text location and date.
-   Use supplied excerpts initially; automated full-text collection is future work.
-5. Seek a domain-qualified reviewer. Independently double-annotate at least 20
-   held-out articles if a second reviewer agrees to participate. No reviewer has
-   yet been confirmed. Report unresolved annotation disagreements.
+Secondary endpoints: Spearman correlation, nDCG, mean top-k assay score, invalid
+output rate, candidate diversity, repeatability and API cost. Analyse single,
+double and triple substitutions separately so mutation-count differences do not
+create a misleading apparent advantage.
 
-Exclude inaccessible or unauthorised text, reviews from the main primary-study
-evaluation, and documents that cannot be represented responsibly in the initial
-single-observation schema. Record exclusions before observing method outputs.
-Keep reviews as background references. Do not invent missing measurements.
+## Two complementary workstreams
 
-## Methods and comparisons
+**Retrospective prioritisation:** sample measured GFP variants, withhold their
+assay scores, obtain model rankings, then compare against the hidden measurements.
+Use the same eligible candidate pool for every method. This is the first feasible
+scientific experiment supported by the current code.
 
-- Run the current regex baseline on the same excerpts.
-- Compare two available Claude model IDs, recorded exactly at run time.
-- Compare three prompt configurations, including the current literal extraction
-  prompt. Create and freeze the alternatives during development.
-- Repeat each model/configuration twice to examine variability.
-- Treat the source as data. Apply local shape and literal quotation validation.
-- Have reviewers judge semantic support, including negation, units, measurement
-  identity and formulation context. Literal quotation alone is insufficient.
+**Prospective design:** ask Claude to propose substitutions within the same
+constraints, record its hypotheses, and compare proposal validity and diversity
+with matched random proposals. These candidates have no assigned measured fitness.
+Any novel proposal's fluorescence requires a new measurement or another documented
+source of experimental evidence. Retrospective scores cannot substitute for that.
 
-The present code implements only one prompt. Comparison orchestration, full run
-failure logs and annotation adjudication are still planned. Failed responses must
-remain in the denominator rather than being silently excluded.
+## Dataset and controls
 
-## Outcomes
+1. Obtain the official `GFP_AEQVI_Sarkisyan_2016.csv` assay file and record its
+   release, retrieval date, licence and SHA-256 hash.
+2. Verify all mutation descriptors and mutated sequences against the included
+   reference. Use at most three substitutions and preserve residues 65–67 for
+   the initial design scope. Report all exclusions.
+3. Use a small development pool for prompt refinement. Freeze prompts, model
+   IDs, candidate-selection rules, hit threshold and budget before evaluation.
+4. Target an evaluation pool of 2,000 eligible variants, subject to a pilot and
+   data availability. Hold development genotypes out of the evaluation pool.
+   Examine related genotypes and overlapping mutation backgrounds separately.
+5. Compare random ranking, fewer-substitutions ranking and two Claude model IDs.
+   Add a protein-specific language-model baseline from ProteinGym when the
+   necessary scores or compute are available. That adapter is not implemented yet.
+6. Repeat model rankings with multiple candidate orders and batch assignments.
+   The current scoring batches contain up to ten candidates, so cross-batch
+   score comparability must be tested rather than assumed.
+7. Measure both invalid-output rate and API cost over all attempted calls.
+   The initial scorer aborts on an invalid batch; a complete run/failure logger
+   must be added before the main comparison.
 
-| Measure | How it will be assessed |
+The current `prepare` command implements seeded sampling and label separation.
+Development/evaluation split orchestration, grouped analyses, confidence
+intervals and the protein-specific model adapter remain planned work.
+
+## Interpretation limits
+
+The assay measures fluorescence in its original experimental setting. It does
+not independently establish molecular brightness, folding stability, toxicity,
+expression or performance in every cell type. Interpret results as assay-specific.
+
+The published GFP landscape may appear in a language model's training data.
+Keeping labels out of the prompt prevents direct label leakage but does not
+demonstrate that the model has never seen the benchmark. Report retrospective
+results accordingly; do not claim de novo novelty from rediscovered substitutions.
+
+Validation against independent experiments would require a qualified laboratory
+collaborator. No collaborator, wet-lab access or supervisor is currently confirmed.
+The initial project can proceed as a computational evaluation.
+
+## Six-month milestones
+
+| Month | Planned output |
 | --- | --- |
-| Field exact match | Normalised string comparison with reference values |
-| Non-null precision/recall/F1 | Separate present values from correctly empty fields |
-| Semantic support | Human judgment that the quote supports the assigned observation |
-| Invalid-output rate | All attempted outputs, including schema/quote failures and refusals |
-| Measurement-confusion rate | Nanoparticle versus emulsion droplet and other identity errors |
-| Reviewer time | Timed, counterbalanced manual and assisted review on matched article groups |
-| API use | Recorded input/output tokens and actual billed usage |
+| 1 | Corpus provenance, mentor/reviewer discussions and a small assay pilot |
+| 2 | Frozen prompts, models, pools and failure-accounting procedure |
+| 3 | Blinded ranking comparisons and mutation-count controls |
+| 4 | Repeatability, ordering sensitivity and error analysis |
+| 5 | Prospective proposal study and protein-model comparison if feasible |
+| 6 | Reproducible evaluation report and release of permitted outputs |
 
-Report per-field errors and confidence intervals at the article level. Predefine
-acceptable precision and semantic-support thresholds with the reviewer rather
-than choosing thresholds after seeing results. If the method fails those targets,
-publish the limitations rather than claim an improvement.
+## API use and provisional request
 
-## Proposed six-month schedule
+A provisional request of **US$300 in API credits** would support the pilot and
+first comparison. The final request should use measured token usage and current
+model prices rather than the programme's maximum award.
 
-| Month | Planned deliverable |
-| --- | --- |
-| 1 | Confirm mentor/reviewer, permissions and pilot eligibility |
-| 2 | Annotate development set and freeze schema, prompts and split |
-| 3 | Assemble held-out annotations and run initial model comparisons |
-| 4 | Complete comparisons, repetitions and error analysis |
-| 5 | Run reviewer-time pilot and improve traceability tooling |
-| 6 | Release permitted annotations, code and an honest evaluation report |
+For planning, 2,000 variants divided into batches of ten gives 200 scoring calls
+per configuration. Two models, two prompt configurations and three repeats would
+produce 2,400 calls, plus a smaller proposal pilot. Pilot token accounting will
+determine whether this full scope fits the credit request; reduce the pool or
+repeat count if necessary. These calls have not been made.
 
-## API credit request assumptions
+## Scientific references
 
-A provisional request of **US$300 in API credits over six months** is a planning
-estimate, not a claim of actual expenditure or eligibility.
-
-At 100 articles × 3 prompt configurations × 2 models × 2 repetitions, the main
-comparison requires 1,200 calls. Assuming 6,000 input and 800 output tokens per
-call, this is approximately 7.2 million input and 0.96 million output tokens.
-A 30% allowance for development and deliberate reruns raises those totals to
-9.36 million and 1.248 million. The application itself disables automatic retries.
-
-Update the token assumptions after the pilot. Calculate the request using actual
-model rates and observed usage before submitting. Reduce corpus size or request
-if the pilot does not justify the proposed scope. No maximum grant amount is
-being requested merely because it is available.
-
-## Limits and next decisions
-
-This is a literature extraction project. It makes no claim of novel emulsion
-chemistry, improved treatment, clinical safety or experimental validation.
-Its scientific value depends on reliable annotations and a useful comparison,
-which still need to be established. A confirmed research supervisor or collaborator
-would strengthen both the study and programme eligibility.
-
-## Starting references
-
-These are real paper leads, not work produced or processed by this project:
-
-1. *pH-controllable stability of iron oxide@chitosan nanocomposite-stabilized
-   magnetic Pickering emulsions* (2023), DOI
-   [10.1016/j.eurpolymj.2023.111870](https://doi.org/10.1016/j.eurpolymj.2023.111870).
-2. He and colleagues, *pH/magnetic dual responsive Pickering emulsion stabilized
-   by Fe3O4@SiO2@chitosan nanoparticles* (2023), DOI
-   [10.1039/d3cp03400c](https://doi.org/10.1039/d3cp03400c),
-   [PubMed record](https://pubmed.ncbi.nlm.nih.gov/37724345/).
+- [Sarkisyan et al., Nature (2016)](https://doi.org/10.1038/nature17995).
+- [ProteinGym paper](https://papers.nips.cc/paper_files/paper/2023/hash/cac723e5ff29f65e3fcbb0739ae91bee-Abstract-Datasets_and_Benchmarks.html).
+- [Official assay metadata](https://github.com/OATML-Markslab/ProteinGym/blob/main/reference_files/DMS_substitutions.csv).

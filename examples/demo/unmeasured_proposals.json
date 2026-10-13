@@ -1,0 +1,111 @@
+{
+  "software_version": "0.2.0",
+  "assay_id": "GFP_AEQVI_Sarkisyan_2016",
+  "reference_sha256": "9be57dbaa8e6d8b324cd1a84684901808c38b3b84f940c08e00a0323f4215e9f",
+  "data_kind": "unmeasured_design",
+  "provider": "random",
+  "seed": 42,
+  "requested_count": 12,
+  "returned_count": 12,
+  "accepted_count": 12,
+  "rejected": [],
+  "api_calls": [],
+  "variants": [
+    {
+      "variant_id": "T9K:G31K:L195I",
+      "mutations": "T9K:G31K:L195I",
+      "sequence": "MSKGEELFKGVVPILVELDGDVNGHKFSVSKEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLIPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 3,
+      "rationale": "Uniform random proposal under the configured sequence constraints.",
+      "biological_validation": "unmeasured"
+    },
+    {
+      "variant_id": "L194E",
+      "mutations": "L194E",
+      "sequence": "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVELPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 1,
+      "rationale": "Uniform random proposal under the configured sequence constraints.",
+      "biological_validation": "unmeasured"
+    },
+    {
+      "variant_id": "Y145D:L195Y:D234R",
+      "mutations": "Y145D:L195Y:D234R",
+      "sequence": "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNDNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLYPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMRELYK",
+      "mutation_count": 3,
+      "rationale": "Uniform random proposal under the configured sequence constraints.",
+      "biological_validation": "unmeasured"
+    },
+    {
+      "variant_id": "G10D",
+      "mutations": "G10D",
+      "sequence": "MSKGEELFTDVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 1,
+      "rationale": "Uniform random proposal under the configured sequence constraints.",
+      "biological_validation": "unmeasured"
+    },
+    {
+      "variant_id": "T62V",
+      "mutations": "T62V",
+      "sequence": "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVVTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 1,
+      "rationale": "Uniform random proposal under the configured sequence constraints.",
+      "biological_validation": "unmeasured"
+    },
+    {
+      "variant_id": "T9W:L53R:N149I",
+      "mutations": "T9W:L53R:N149I",
+      "sequence": "MSKGEELFWGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKRPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHIVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 3,
+      "rationale": "Uniform random proposal under the configured sequence constraints.",
+      "biological_validation": "unmeasured"
+    },
+    {
+      "variant_id": "H77A:K156G",
+      "mutations": "H77A:K156G",
+      "sequence": "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDAMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADGQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 2,
+      "rationale": "Uniform random proposal under the configured sequence constraints.",
+      "biological_validation": "unmeasured"
+    },
+    {
+      "variant_id": "H77F:V93H:F114N",
+      "mutations": "H77F:V93H:F114N",
+      "sequence": "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDFMKQHDFFKSAMPEGYHQERTIFFKDDGNYKTRAEVKNEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 3,
+      "rationale": "Uniform random proposal under the configured sequence constraints.",
+      "biological_validation": "unmeasured"
+    },
+    {
+      "variant_id": "K26Q",
+      "mutations": "K26Q",
+      "sequence": "MSKGEELFTGVVPILVELDGDVNGHQFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 1,
+      "rationale": "Uniform random proposal under the configured sequence constraints.",
+      "biological_validation": "unmeasured"
+    },
+    {
+      "variant_id": "T97N",
+      "mutations": "T97N",
+      "sequence": "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERNIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 1,
+      "rationale": "Uniform random proposal under the configured sequence constraints.",
+      "biological_validation": "unmeasured"
+    },
+    {
+      "variant_id": "I14S:R73W:N212E",
+      "mutations": "I14S:R73W:N212E",
+      "sequence": "MSKGEELFTGVVPSLVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSWYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPEEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 3,
+      "rationale": "Uniform random proposal under the configured sequence constraints.",
+      "biological_validation": "unmeasured"
+    },
+    {
+      "variant_id": "N23L:S147N",
+      "mutations": "N23L:S147N",
+      "sequence": "MSKGEELFTGVVPILVELDGDVLGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNNHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 2,
+      "rationale": "Uniform random proposal under the configured sequence constraints.",
+      "biological_validation": "unmeasured"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "software_version": "0.2.0",
+  "assay_id": "GFP_AEQVI_Sarkisyan_2016",
+  "reference_sha256": "9be57dbaa8e6d8b324cd1a84684901808c38b3b84f940c08e00a0323f4215e9f",
+  "assay_sha256": "349cd988159485ee1aaf72efc4cc32ee83a7ebdb580d22e0acdd027a1769f7bd",
+  "data_kind": "synthetic",
+  "method": "distance",
+  "seed": 42,
+  "api_calls": [],
+  "attempted_candidates": 8,
+  "scored_candidates": 8,
+  "variants": [
+    {
+      "variant_id": "E6D",
+      "mutations": "E6D",
+      "sequence": "MSKGEDLFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 1,
+      "predicted_score": 0.5,
+      "rationale": "Fewer-substitutions baseline.",
+      "uncertainty": "This baseline does not predict fluorescence or folding."
+    },
+    {
+      "variant_id": "G10A",
+      "mutations": "G10A",
+      "sequence": "MSKGEELFTAVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 1,
+      "predicted_score": 0.5,
+      "rationale": "Fewer-substitutions baseline.",
+      "uncertainty": "This baseline does not predict fluorescence or folding."
+    },
+    {
+      "variant_id": "K3R",
+      "mutations": "K3R",
+      "sequence": "MSRGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 1,
+      "predicted_score": 0.5,
+      "rationale": "Fewer-substitutions baseline.",
+      "uncertainty": "This baseline does not predict fluorescence or folding."
+    },
+    {
+      "variant_id": "V12I",
+      "mutations": "V12I",
+      "sequence": "MSKGEELFTGVIPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 1,
+      "predicted_score": 0.5,
+      "rationale": "Fewer-substitutions baseline.",
+      "uncertainty": "This baseline does not predict fluorescence or folding."
+    },
+    {
+      "variant_id": "G10A:V12I",
+      "mutations": "G10A:V12I",
+      "sequence": "MSKGEELFTAVIPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 2,
+      "predicted_score": 0.3333333333333333,
+      "rationale": "Fewer-substitutions baseline.",
+      "uncertainty": "This baseline does not predict fluorescence or folding."
+    },
+    {
+      "variant_id": "K3R:E6D",
+      "mutations": "K3R:E6D",
+      "sequence": "MSRGEDLFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 2,
+      "predicted_score": 0.3333333333333333,
+      "rationale": "Fewer-substitutions baseline.",
+      "uncertainty": "This baseline does not predict fluorescence or folding."
+    },
+    {
+      "variant_id": "E6D:G10A:V12I",
+      "mutations": "E6D:G10A:V12I",
+      "sequence": "MSKGEDLFTAVIPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 3,
+      "predicted_score": 0.25,
+      "rationale": "Fewer-substitutions baseline.",
+      "uncertainty": "This baseline does not predict fluorescence or folding."
+    },
+    {
+      "variant_id": "K3R:G10A:V12I",
+      "mutations": "K3R:G10A:V12I",
+      "sequence": "MSRGEELFTAVIPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+      "mutation_count": 3,
+      "predicted_score": 0.25,
+      "rationale": "Fewer-substitutions baseline.",
+      "uncertainty": "This baseline does not predict fluorescence or folding."
+    }
+  ]
+}

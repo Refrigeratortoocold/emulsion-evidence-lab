@@ -1,3 +1,2 @@
-# Optional. The offline demo and tests use only the Python standard library.
-# Record the installed SDK version alongside real research runs.
+# Optional. Offline commands use only the Python standard library.
 anthropic

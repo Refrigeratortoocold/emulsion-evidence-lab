@@ -1,0 +1,22 @@
+{
+  "project": "Claude Protein Design",
+  "assay_id": "GFP_AEQVI_Sarkisyan_2016",
+  "source_organism": "Aequorea victoria",
+  "reference_sequence": "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTLSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+  "sequence_length": 238,
+  "allowed_position_start": 3,
+  "allowed_position_end": 237,
+  "protected_positions": [
+    65,
+    66,
+    67
+  ],
+  "protected_motif": "SYG",
+  "max_mutations": 3,
+  "source_url": "https://github.com/OATML-Markslab/ProteinGym/blob/main/reference_files/DMS_substitutions.csv",
+  "source_blob_sha": "8d1ea9a19c0404b511cd24378b25c2a5f86f10e9",
+  "retrieved_on": "2026-10-13",
+  "reference_note": "Use this exact assay reference. It is not interchangeable with a generic GFP UniProt sequence.",
+  "published_assay_rows": 51714,
+  "published_assay_type": "Fluorescence"
+}

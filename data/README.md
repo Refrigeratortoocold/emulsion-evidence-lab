@@ -1,27 +1,41 @@
 # Data provenance
 
-`demo_documents.jsonl` contains four invented software fixtures. Their numbers
-do not describe actual experiments, the maintainer's earlier research, or the
-papers in the seed catalogue. `demo_gold.json` contains manually specified
-expected values for those fixtures.
+## Real reference sequence
 
-`paper_seed_catalog.csv` lists two real publications whose titles, DOIs and
-source pages were checked on 13 October 2026. It contains bibliographic metadata
-only. No paper texts have been downloaded, annotated or processed by this project.
-The authors of those papers are not members of this project.
+`reference.json` contains the exact reference for
+`GFP_AEQVI_Sarkisyan_2016`, retrieved from the official ProteinGym
+`reference_files/DMS_substitutions.csv` on 13 October 2026.
 
-For your own inputs, use one JSON object per line:
+- Source: https://github.com/OATML-Markslab/ProteinGym/blob/main/reference_files/DMS_substitutions.csv
+- Source blob SHA: `8d1ea9a19c0404b511cd24378b25c2a5f86f10e9`
+- Organism: Aequorea victoria.
+- Sequence length: 238 amino acids.
+- Exact assay reference: use this background for mutation numbering and validation.
+- Upstream licence: MIT; the original notice is retained in `PROTEINGYM_LICENSE.txt`.
 
-```json
-{"id":"your-paper-001","title":"Actual title","data_kind":"published","source_url":"https://doi.org/ACTUAL-DOI","text":"Text you have permission to process"}
-```
+The permitted mutation region and the protected positions define this project's
+initial design constraints. The protected motif is `SYG` at positions 65–67.
 
-Use `synthetic`, `published` or `user_owned` as `data_kind`. A published record
-requires a source URL. Record DOI, licence, excerpt location and retrieval date
-in your own corpus manifest. Keep restricted text in `private_data/`, which is
-excluded from git. Publish a gold dataset only when its content licence permits it.
+## Synthetic software fixture
 
-The seven output fields represent one observation per field, selected from a
-supplied excerpt. Null means **not extracted**, rather than proof that a property
-is absent or that the complete paper did not report it. Multiple formulations,
-conditions, replicates, uncertainty and full-text tables need a future schema.
+`synthetic_assay.csv` contains nine invented mutation/score examples built from
+the real reference sequence. Their `DMS_score` values are made up solely for
+software verification. They are not values measured by Sarkisyan and colleagues,
+ProteinGym, the maintainer or a laboratory.
+
+Eight examples meet the project's design constraints. One changes a protected
+position so the pipeline can verify exclusion accounting. Generated example
+reports explicitly label these assay scores as synthetic.
+
+## Actual experimental measurements
+
+The full published assay is not bundled. Obtain it from the official ProteinGym
+resources, record its release and provenance, and supply it locally to `prepare`
+and `evaluate`. Label published data explicitly with `--data-kind published`.
+
+Required columns: `mutant`, `mutated_sequence`, `DMS_score`. Larger DMS scores
+represent higher assay fitness in the ProteinGym convention. Keep the original
+measurement interpretation and licence with the imported dataset. `prepare`
+withholds measured scores from the candidate input; `evaluate` loads them later.
+
+Store downloaded or restricted data in `private_data/`, which is excluded from git.

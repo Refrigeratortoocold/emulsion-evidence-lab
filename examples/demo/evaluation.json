@@ -1,47 +1,15 @@
 {
-  "evaluation_scope": "synthetic_smoke_test",
-  "documents": 4,
-  "fields_total": 28,
-  "field_exact_match": 1.0,
-  "non_null_precision": 1.0,
-  "non_null_recall": 1.0,
-  "non_null_f1": 1.0,
-  "true_positive": 15,
-  "false_positive": 0,
-  "false_negative": 0,
-  "true_null": 13,
-  "literal_quote_check_rate": 1.0,
-  "quote_check_note": "Accepted predictions only; this does not measure rejected responses or semantic support.",
-  "by_field": {
-    "stabilizer": {
-      "exact": 4,
-      "total": 4
-    },
-    "oil_phase": {
-      "exact": 4,
-      "total": 4
-    },
-    "ph_condition": {
-      "exact": 4,
-      "total": 4
-    },
-    "droplet_size": {
-      "exact": 4,
-      "total": 4
-    },
-    "stability_observation": {
-      "exact": 4,
-      "total": 4
-    },
-    "magnetic_response": {
-      "exact": 4,
-      "total": 4
-    },
-    "cargo_release": {
-      "exact": 4,
-      "total": 4
-    }
-  },
-  "mismatches": [],
-  "limitation": "Small synthetic fixture scores measure software behaviour, not real-paper extraction accuracy or Claude performance."
+  "evaluation_kind": "synthetic_software_test",
+  "assay_id": "GFP_AEQVI_Sarkisyan_2016",
+  "assay_sha256": "349cd988159485ee1aaf72efc4cc32ee83a7ebdb580d22e0acdd027a1769f7bd",
+  "method": "distance",
+  "evaluated_candidates": 8,
+  "top_k": 3,
+  "spearman": 0.41147559989891175,
+  "ndcg_at_k": 0.48288099465895673,
+  "ndcg_definition": "Linear relevance = DMS_score minus the minimum score within the evaluated candidate pool; prediction ties are broken by canonical variant ID.",
+  "top_k_mean_DMS_score": 2.2666666666666666,
+  "hit_threshold": null,
+  "top_k_hit_rate": null,
+  "limitation": "Synthetic labels test software only. Retrospective results do not establish new experimental improvements, novelty, folding stability, or causal mechanisms."
 }

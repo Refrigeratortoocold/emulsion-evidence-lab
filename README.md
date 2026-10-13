@@ -1,63 +1,100 @@
-# Emulsion Evidence Lab
+# Claude Protein Design
 
-**Evidence-linked literature extraction for stimuli-responsive Pickering emulsions.**
+**Claude-assisted design and prioritisation of green fluorescent protein variants.**
 
-An early research prototype for studying whether Claude can help researchers
-extract material properties and reported observations from papers, while retaining
-the exact source passages needed for review.
+This research prototype asks whether Claude can propose and rank amino acid
+substitutions that retain or increase GFP fluorescence. It combines constrained
+variant generation, reproducible baselines, a local review report and evaluation
+against separately supplied experimental assay measurements.
 
-Maintainer: **Soh Jia Sheng**. Initial code and documentation were prepared with
-AI assistance. The maintainer should review the code and understand the demo before
-presenting it as their work. No supervisor, laboratory, institutional endorsement,
-funding award or completed scientific validation is claimed.
+The biological case study is the GFP assay from Sarkisyan and colleagues (2016),
+as represented in the official ProteinGym benchmark. The exact assay reference
+sequence is included with source provenance. Its substitutions are checked using
+that reference, rather than an interchangeable generic GFP sequence.
+
+Maintainer: **Soh Jia Sheng**. Initial implementation and documentation were
+prepared with AI assistance. This is an independent undergraduate prototype;
+no confirmed supervisor or institutional endorsement is claimed.
 
 ## Research question
 
-Can Claude improve extraction of reported emulsion properties over a simple
-pattern-matching baseline, without increasing unsupported statements or reviewer
-workload?
+Can Claude improve the prioritisation of fluorescent-protein variants relative
+to random ranking and a fewer-substitutions baseline, while producing valid
+sequences, useful hypotheses and explicit uncertainty?
 
-The initial focus is iron oxide–chitosan and related Pickering emulsions. This
-connects colloid chemistry with research on delivery systems. The present software
-extracts reported observations; it does not establish therapeutic effectiveness
-or propose validated formulations.
+The target outcome is fluorescence in the supplied assay. A sequence-valid
+candidate or a model's rationale does not establish improved folding, brightness,
+chromophore maturation, stability or experimental success.
 
-## Current status
+## Implemented now
 
-| Available now | Planned work |
-| --- | --- |
-| Runnable Python extractor and review report | Collect a corpus with permission to process its text |
-| Deterministic baseline with no external dependencies | Obtain expert-reviewed reference annotations |
-| Optional Claude SDK integration | Run and compare live Claude configurations |
-| Literal quote, character-offset and source-hash checks | Evaluate semantic support, negation and formulation context |
-| Four clearly labelled synthetic fixtures | Measure accuracy, cost and reviewer time on held-out papers |
-| 23 passing offline tests | Investigate extraction of multiple conditions and table data |
+- Generate constrained GFP substitution proposals using a seeded random baseline
+  or optional Claude API integration.
+- Preserve the reference length, the 20-amino-acid alphabet and positions 65–67.
+  Apply a maximum of three substitutions within the configured assay region.
+- Reject incorrect reference residues, repeated positions, indels and invalid
+  model outputs. Record rejected design proposals.
+- Prepare a blinded candidate pool from a ProteinGym-format assay CSV. Measured
+  scores remain separate from the ranking input.
+- Rank candidates with seeded random scores, mutation-distance scores or Claude.
+- Export ranked candidates as JSON, CSV, FASTA and an interactive local HTML report.
+- Evaluate measured candidates using tie-aware Spearman correlation, nDCG and
+  top-k assay statistics.
 
-**No live Claude request has been made in the initial verification. No real
-publication has been processed by the demo. Synthetic fixture scores are software
-smoke tests, not research results.**
+**Twenty offline tests and a synthetic pipeline demonstration have been run.
+No live Claude experiment, real-assay performance result or new laboratory
+validation is claimed.**
 
-## Run the offline demo
+## Run the offline demonstration
 
-Requires Python 3.11 or later. From this repository folder:
+Requires Python 3.11 or later. No package installation or API key is needed:
 
 ```bash
-python3 app.py extract --input data/demo_documents.jsonl --provider baseline --output outputs/demo
-python3 app.py evaluate --predictions outputs/demo/results.jsonl --gold data/demo_gold.json --output outputs/demo/evaluation.json
+python3 app.py demo --output outputs/demo
 python3 -m unittest discover -s tests -v
 ```
 
-Open `outputs/demo/review.html` in a browser. Expand an evidence row to read the
-supporting passage, and use the search box to filter the report. The HTML report
-is local and has no external dependencies or data uploads.
+Open `outputs/demo/review.html` locally. The report lets you inspect substitutions,
+priority scores, uncertainty and full candidate sequences.
 
-A ready-generated synthetic report is included in [examples/demo/review.html](examples/demo/review.html).
-On GitHub, download that file and open it locally to use the report.
+A generated example is included at [examples/demo/review.html](examples/demo/review.html).
+Download the HTML file and open it locally to view it. The toy assay scores are
+explicitly synthetic and do not describe actual GFP measurements.
+
+## Propose protein variants
+
+```bash
+python3 app.py propose --provider random --count 20 --seed 42 --output outputs/proposals.json
+python3 app.py rank --input outputs/proposals.json --provider distance --output outputs/proposal-ranking
+```
+
+These are unmeasured design candidates. Evaluation requires actual measurements
+for every candidate; the application will not fill in missing assay scores.
+For a realistic initial comparison, rank an existing measured candidate pool
+without revealing its assay labels to the model.
+
+## Use a real GFP assay
+
+Obtain `GFP_AEQVI_Sarkisyan_2016.csv` from the
+[official ProteinGym data resources](https://github.com/OATML-Markslab/ProteinGym).
+Place it in `private_data/`. The full assay is not bundled with this prototype.
+
+```bash
+python3 app.py prepare --assay private_data/GFP_AEQVI_Sarkisyan_2016.csv --count 200 --seed 42 --data-kind published --output outputs/benchmark-candidates.json
+python3 app.py rank --input outputs/benchmark-candidates.json --provider distance --output outputs/distance
+python3 app.py rank --input outputs/benchmark-candidates.json --provider random --seed 42 --output outputs/random
+python3 app.py evaluate --ranking outputs/distance/ranking.json --assay private_data/GFP_AEQVI_Sarkisyan_2016.csv --top-k 20 --output outputs/distance-evaluation.json
+```
+
+The adapter verifies each mutated sequence against its mutation descriptor and
+the included assay reference. It records eligible and excluded row counts, samples
+without using assay scores, and retains the assay hash for later evaluation.
+Canonical duplicate variants must be explicitly aggregated upstream.
 
 ## Use Claude
 
-Claude mode sends the supplied text to the Anthropic API and consumes API credits.
-The offline demo makes no API calls. Set a current API model ID explicitly:
+Install the optional SDK and select an API model available to your Console
+organisation. The application does not automatically load `.env` files.
 
 ```bash
 python3 -m venv .venv
@@ -65,79 +102,59 @@ source .venv/bin/activate
 python3 -m pip install -r requirements-claude.txt
 export ANTHROPIC_API_KEY="YOUR_API_KEY"
 export ANTHROPIC_MODEL="YOUR_AVAILABLE_MODEL_ID"
-python3 app.py extract --input data/demo_documents.jsonl --provider claude --limit 1 --output outputs/claude-pilot
+python3 app.py propose --provider claude --count 10 --output outputs/claude-proposals.json
+python3 app.py rank --input outputs/benchmark-candidates.json --provider claude --output outputs/claude-ranking
 ```
 
-On Windows, use `python` and the virtual environment activation command for your
-shell. `.env.example` documents the variables; the application does not load
-`.env` files automatically. Never commit a real key.
+Check the [official Claude model catalogue](https://platform.claude.com/docs/en/models/overview)
+for available model IDs. Live mode sends reference/candidate sequences to Anthropic
+and consumes API credits. Scoring uses batches of up to ten candidates. Model IDs,
+prompt hashes and token usage are recorded. Automatic SDK retries are disabled.
 
-The model is configurable rather than hard-coded. Check the
-[official model catalogue](https://platform.claude.com/docs/en/models/overview)
-for an ID available to your Console organisation. The SDK is optional and installed
-only for Claude mode. Record its installed version with your research results.
+A malformed or incomplete scoring response stops the command. Earlier successful
+API calls may already have consumed credits. This initial version does not retain
+partial ranking results after a failed command. Score calibration across batches
+is a research limitation, not an established property of the method.
 
-The integration disables automatic SDK retries and makes at most one request per
-document. A malformed, truncated or invalid extraction stops the batch. If an
-error occurs, earlier calls may already have consumed credits; this prototype
-does not persist partial results from a failed batch.
+## Evaluation definitions
 
-## Extraction and review
-
-Seven fields are extracted: stabilizer, oil phase, pH condition, droplet size,
-stability observation, magnetic response and cargo release. Each populated value
-must be copied from an exact supporting quote. The quote must occur in the supplied
-source. Character offsets use Python Unicode indices with an exclusive end.
-
-Every populated field is marked `needs_review`. A null is `not_extracted` and
-does not prove the paper lacks that information. A source hash and, for Claude,
-model, prompt hash and token usage accompany each record.
-
-| Output | Purpose |
+| Measure | Definition |
 | --- | --- |
-| `results.jsonl` | Exact machine-readable values, quotes, provenance and metadata |
-| `evidence.csv` | Spreadsheet review; formula-like text is escaped for safer viewing |
-| `report.md` | Compact text summary |
-| `review.html` | Searchable, expandable local evidence report |
-| `evaluation.json` | Comparison with supplied reference values when evaluation is run |
+| Spearman | Rank correlation with average ranks for tied values; undefined for a constant ranking |
+| nDCG at k | Linear relevance equals the assay score minus the pool minimum; ties use canonical variant ID |
+| Top-k mean | Mean measured DMS score of the selected candidates |
+| Top-k hit rate | Optional fraction meeting a user-supplied `--hit-threshold` |
 
-Literal quote validation establishes **where text came from**. It does not prove
-that the quote supports the field or that a conclusion is scientifically correct.
-For example, a quote saying an oil was not used can still contain that oil's name.
-Expert review must check negation, context and measurement identity.
+Predicted priority scores are not calibrated probabilities or measured fluorescence.
+The distance baseline favours fewer substitutions and is deliberately simple.
+Neither baseline models structure or epistasis. Comparisons with protein-specific
+models and biological testing are proposed in the research plan.
 
-The baseline covers a small vocabulary and a few sentence patterns. It can miss
-synonyms or select a negated mention. Neither method currently associates multiple
-formulations with multiple conditions. Do not interpret its first-observation
-output as a complete representation of a study.
+## Research documents
 
-## Evaluation approach
+- [Research plan](docs/RESEARCH_PLAN.md): study design, baselines and six-month milestones.
+- [Application draft](docs/APPLICATION_DRAFT.md): proposal text for AI for Science.
+- [Validation record](docs/VALIDATION.md): completed software checks and remaining experiments.
+- [Data provenance](data/README.md): the real reference sequence and synthetic test labels.
 
-The implemented scorer reports exact field match, non-null precision/recall/F1,
-field-level mismatches and a literal-quote check rate for accepted predictions.
-A wrong populated value counts as both a false positive and a false negative.
-True nulls are separate, so missing fields do not inflate non-null precision.
-Semantic support and failed-generation rates still require separate annotation
-and run accounting, described in the research plan.
+## Programme fit
 
-## Project documents
+Anthropic's [AI for Science programme](https://support.claude.com/en/articles/11199177-anthropic-s-ai-for-science-program)
+particularly prioritises biology and life sciences. This proposal studies protein
+engineering and uses Claude for repeatable design and prioritisation experiments.
+Programme acceptance also depends on scientific merit, feasibility, credentials
+and institutional research attachment.
 
-- [Research plan](docs/RESEARCH_PLAN.md): hypothesis, corpus, comparisons and six-month milestones.
-- [Application draft](docs/APPLICATION_DRAFT.md): editable, status-accurate proposal.
-- [Publishing guide](docs/PUBLISH_TO_GITHUB.md): repository creation and upload instructions.
-- [Data provenance](data/README.md): synthetic fixtures and a real-paper seed catalogue.
-- [Validation record](docs/VALIDATION.md): what was checked and what remains untested.
+## References and licensing
 
-## Programme context
+1. Sarkisyan and colleagues (2016), *Local fitness landscape of the green
+   fluorescent protein*, Nature. [DOI: 10.1038/nature17995](https://doi.org/10.1038/nature17995).
+2. Notin and colleagues (2023), *ProteinGym: Large-Scale Benchmarks for Protein
+   Fitness Prediction and Design*.
+   [Official paper](https://papers.nips.cc/paper_files/paper/2023/hash/cac723e5ff29f65e3fcbb0739ae91bee-Abstract-Datasets_and_Benchmarks.html)
+   and [code/data resources](https://github.com/OATML-Markslab/ProteinGym).
 
-This repository can support an application to
-[Anthropic's AI for Science Programme](https://support.claude.com/en/articles/11199177-anthropic-s-ai-for-science-program).
-Its official criteria include scientific merit, potential impact, technical
-feasibility and team credentials. The programme supports research API usage.
-Creating this repository does not establish institutional research attachment
-or guarantee acceptance. Programme details were checked on 13 October 2026.
-
-## Licence
-
-The code and original synthetic fixtures use the MIT licence. Bibliographic
-metadata and third-party article content retain their respective rights.
+Original project code uses MIT licensing. The included ProteinGym reference
+metadata is attributed in `data/reference.json`; its upstream MIT notice is
+retained in `data/PROTEINGYM_LICENSE.txt`. Source publication rights remain with
+their respective owners.

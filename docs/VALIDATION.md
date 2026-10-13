@@ -1,25 +1,22 @@
-# Initial validation
+# Software validation
 
 Checked on 13 October 2026 using Python 3.12.14.
 
-The initial offline verification passed 23 tests covering the complete extraction
-and evaluation workflow, missing information, decimal and Unicode handling,
-particle-versus-droplet distinctions, fabricated quotes, source hashes,
-character-offset tampering, evaluation denominators, HTML escaping and input
-provenance. Mocked Claude tests checked configured model use, token metadata,
-disabled retries and rejection of a truncated response.
+Twenty offline tests passed. They cover reference-sequence identity, canonical
+substitution parsing, protected residues, mutation budgets, reproducibility,
+measured-label separation, exclusion accounting, tie-aware correlation,
+normalised ranking metrics, assay-hash consistency, malformed Claude scores,
+HTML escaping and complete command-line demo execution.
 
-The command-line demo and evaluation were also run. The four fixtures contain
-28 field slots. The regex baseline matched their manually specified expected
-values. This deliberately small synthetic example is not a scientific benchmark.
+Mocked Claude calls verified that measured labels are absent from the model
+payload, automatic retries are disabled, and model/token metadata is recorded.
+No real Claude request was made in this verification.
 
-The CI workflow is prepared for Python 3.11 and 3.12 and will run on GitHub after
-the project files are uploaded. Check the repository's Actions page for the actual
-run status. No live API request was made; no credit was spent in validation.
-Real Claude compatibility and accuracy require an actual permitted pilot run
-with an API key.
+The public ProteinGym reference sequence and its source blob were retrieved and
+checked. The full experimental assay was not downloaded or evaluated. The demo
+uses invented fluorescence scores solely to exercise the software pipeline.
 
-The generated HTML report was checked for its synthetic-data label and escaped
-content. Quote presence is explicitly insufficient to establish semantic support.
-Full scientific annotation, source licensing decisions and institutional research
-attachment remain outside the completed software verification.
+The GitHub Actions workflow runs the tests and demo on Python 3.11 and 3.12.
+Check the repository's Actions page for the result of each published commit.
+Scientific validation still requires the actual assay comparison described in
+the research plan.

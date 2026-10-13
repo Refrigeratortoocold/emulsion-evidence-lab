@@ -1,97 +1,94 @@
 # AI for Science application draft
 
-This is a proposal to review and adapt, not a submitted application. The public
-form's first page was checked; later form questions were not available in that
-read. The sections below are reusable proposal text rather than a claim to mirror
-every current form field.
-
-Before submission, confirm your current academic details, actual project role,
-research attachment, available reviewer, repository URL and API organisation ID.
-Do not list a supervisor, laboratory or collaborator without their agreement.
+Review and adapt this proposal to the current application questions. Confirm your
+academic contact, actual research attachment and Claude Console organisation ID
+before submission. This file is a proposal, not a submitted or approved application.
 
 ## Project title
 
-Emulsion Evidence Lab: Evaluating Claude for Evidence-Linked Extraction of
-Stimuli-Responsive Pickering Emulsion Research
+Claude-Assisted Protein Design: Generating and Prioritising Green Fluorescent
+Protein Variants Against a Public Experimental Fitness Landscape
 
-## Applicant background
+## Applicant and project status
 
 My name is Soh Jia Sheng. I am a Life Sciences undergraduate at the National
-University of Singapore. My earlier project experience includes studying iron
-oxide–chitosan nanocomposite Pickering emulsions. This motivated my interest in
-how researchers compare reported material properties and experimental observations
-across studies.
+University of Singapore, with an interest in computational biology and protein
+engineering. I am developing an independent computational prototype to investigate
+how generative AI can support fluorescent-protein design.
 
-The current project is an independent prototype. I am seeking a qualified academic
-mentor or collaborator to help refine the evaluation and review annotations. I do
-not currently claim a confirmed project supervisor or institutional endorsement.
+The repository currently contains a working constrained variant generator,
+optional Claude API integration, ranking baselines, benchmark-data preparation and
+evaluation code. Twenty offline tests and a synthetic end-to-end demonstration
+have been completed. I have not yet run a live Claude comparison on the published
+GFP assay or performed laboratory validation. Project supervision and research
+collaboration are not currently confirmed.
 
-## Project summary
+## Research question and scientific value
 
-I propose to evaluate whether Claude can improve the extraction of reported
-properties from research on stimuli-responsive Pickering emulsions. The workflow
-will organise stabilizer materials, oil phases, pH conditions, droplet measurements,
-stability observations, magnetic responses and cargo-release observations. Each
-extracted value will retain an exact supporting passage for human review.
+Can Claude generate sequence-valid GFP design hypotheses and prioritise variants
+with high measured fluorescence more effectively than simple baselines?
 
-I have prepared a Python prototype with a deterministic baseline, optional Claude
-API integration, source quotation checks, provenance hashes and a local review
-report. It has been verified using four explicitly synthetic fixtures and offline
-tests. No live Claude performance or real-paper accuracy result is claimed yet.
+Fluorescent proteins provide a concrete biological design problem. The public
+GFP fitness landscape reported by Sarkisyan and colleagues offers experimental
+measurements with which to assess prioritisation. This makes it possible to test
+whether a general-purpose language model contributes useful design reasoning,
+rather than assuming that its plausible explanations reflect biological accuracy.
 
-## Why Claude and why API access
+The study will first rank measured variants while withholding their assay scores
+from Claude. It will then examine constrained, unmeasured design proposals for
+validity, diversity and uncertainty. Prospective candidates will remain hypotheses
+until actual fluorescence evidence becomes available.
 
-Scientific descriptions vary in wording and often require context to distinguish
-different measurements. A simple pattern matcher is limited to predefined words
-and phrases. I want to test whether Claude can extract useful observations from
-more varied passages while avoiding unsupported values.
+## How Claude will be used
 
-API access would support repeatable comparisons across recorded model IDs and
-prompt versions. It would also allow token usage to be logged alongside results.
-The study will measure Claude's value rather than assume that it outperforms the
-baseline. Exact quotations will remain subject to expert interpretation.
+Claude will receive the exact assay reference sequence, permitted mutation region
+and protected residues. It will propose amino acid substitutions and provide
+concise, uncertainty-aware rationales. In the ranking experiment, it will score
+specified variants without receiving experimental labels.
 
-## Proposed evaluation and contribution
+Local validation checks reference residues, mutation positions, the sequence
+alphabet and mutation budget. Model IDs, prompt hashes and API token usage will
+be recorded. The API makes repeated comparisons and structured outputs practical.
+Specialised protein models will provide an additional comparator when the relevant
+scores or computing resources are available.
 
-I plan to begin with a small corpus pilot, then target 100 eligible papers if
-permissions, annotations and reviewer availability allow. Twenty articles would
-be used for development and eighty reserved for evaluation. Planned comparisons
-include a regex baseline, two Claude models, three prompt configurations and two
-repetitions.
+## Evaluation and planned outputs
 
-The main outcomes would be extraction precision and recall, human-rated semantic
-support, invalid-output rate, reviewer time and API use. I would publish the code,
-evaluation procedure and any annotations permitted by source licences. The aim
-is a reproducible assessment of a literature extraction workflow. The project
-does not claim to discover a new drug delivery formulation.
+The proposed evaluation uses random ranking and mutation-distance ranking as
+initial controls, with the same eligible variants across methods. The main
+comparison will measure top-k enrichment, rank correlation, nDCG, invalid-output
+rate, diversity, repeatability and API use. Single and combined substitutions
+will be analysed separately.
 
-## Credit request and schedule
+I plan to start with a small pilot, freeze the comparison rules, and then target
+2,000 eligible measured variants if the pilot and budget justify that scope.
+Repeated model runs and shuffled candidate orders will assess sensitivity to
+batching and prompt presentation. Published-benchmark contamination will be
+acknowledged, and retrospective performance will not be described as proof of
+novel experimental improvements.
+
+I aim to release the code, permitted candidate outputs and a reproducible
+evaluation report describing both useful results and failures.
+
+## Credit request and timeline
 
 I provisionally request US$300 in API credits for a six-month pilot and evaluation.
-The proposed main comparison comprises approximately 1,200 calls. Assuming 6,000
-input and 800 output tokens per call, the estimated main use is 7.2 million input
-and 0.96 million output tokens. I will revise the request after measuring pilot
-usage and checking current model pricing.
+I will revise the experimental scope after measuring real token use and checking
+current model pricing. The first two months will establish the dataset, prompts
+and comparison procedure. The next two will run the main evaluation. The final
+two will examine prospective proposals, error patterns and reproducibility.
 
-The first two months would establish reviewer participation, permissions and
-reference annotations. The next two would run comparisons and analyse errors.
-The final two would evaluate reviewer time and prepare a reproducible release.
+## Details to confirm
 
-## Details to complete accurately
-
-| Item | Current state |
+| Item | Entry |
 | --- | --- |
-| Academic contact email | Enter your actual academic email; not invented here |
-| Research group or supervisor | Unconfirmed; do not present student enrolment as project supervision |
-| Repository URL | https://github.com/Refrigeratortoocold/emulsion-evidence-lab |
+| Repository | https://github.com/Refrigeratortoocold/claude-protein-design |
+| Academic email | Enter your actual academic email |
+| Research attachment or supervisor | Unconfirmed; add only a genuine agreed arrangement |
 | Claude Console organisation ID | Enter the actual organisation receiving credits |
-| Research credentials | Link real project evidence or a CV, if requested |
-| Reference annotations and live results | Planned; not completed |
+| Completed biological results | None claimed at this stage |
 
-The official programme is intended for institution-attached researchers and
-evaluates team credentials as well as the project. Student status and a prototype
-alone do not confirm eligibility. Review the
-[official programme description](https://support.claude.com/en/articles/11199177-anthropic-s-ai-for-science-program)
-and the
-[application form](https://docs.google.com/forms/d/e/1FAIpQLSfwDGfVg2lHJ0cc0oF_ilEnjvr_r4_paYi7VLlr5cLNXASdvA/viewform)
-before submitting.
+Anthropic prioritises biology and life sciences, and evaluates scientific merit,
+impact, feasibility and team credentials. Confirm how your actual research
+attachment meets its criteria using the
+[official programme page](https://support.claude.com/en/articles/11199177-anthropic-s-ai-for-science-program).
