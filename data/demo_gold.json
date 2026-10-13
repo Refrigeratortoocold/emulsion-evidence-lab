@@ -1,0 +1,38 @@
+{
+  "synthetic-001": {
+    "stabilizer": "iron oxide-chitosan",
+    "oil_phase": "sunflower oil",
+    "ph_condition": "pH 5.2",
+    "droplet_size": "droplet diameter was 2.6 um",
+    "stability_observation": "remained stable",
+    "magnetic_response": "magnetic attraction",
+    "cargo_release": "released 41%"
+  },
+  "synthetic-002": {
+    "stabilizer": "chitosan-alginate",
+    "oil_phase": "olive oil",
+    "ph_condition": "pH 6.8",
+    "droplet_size": "droplet size was 4.1 um",
+    "stability_observation": "Phase separation",
+    "magnetic_response": null,
+    "cargo_release": null
+  },
+  "synthetic-003": {
+    "stabilizer": "Silica",
+    "oil_phase": "liquid paraffin",
+    "ph_condition": "pH 7.0",
+    "droplet_size": null,
+    "stability_observation": null,
+    "magnetic_response": null,
+    "cargo_release": null
+  },
+  "synthetic-004": {
+    "stabilizer": null,
+    "oil_phase": null,
+    "ph_condition": null,
+    "droplet_size": null,
+    "stability_observation": null,
+    "magnetic_response": null,
+    "cargo_release": null
+  }
+}

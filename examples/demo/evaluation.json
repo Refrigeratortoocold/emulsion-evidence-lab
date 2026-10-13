@@ -1,0 +1,47 @@
+{
+  "evaluation_scope": "synthetic_smoke_test",
+  "documents": 4,
+  "fields_total": 28,
+  "field_exact_match": 1.0,
+  "non_null_precision": 1.0,
+  "non_null_recall": 1.0,
+  "non_null_f1": 1.0,
+  "true_positive": 15,
+  "false_positive": 0,
+  "false_negative": 0,
+  "true_null": 13,
+  "literal_quote_check_rate": 1.0,
+  "quote_check_note": "Accepted predictions only; this does not measure rejected responses or semantic support.",
+  "by_field": {
+    "stabilizer": {
+      "exact": 4,
+      "total": 4
+    },
+    "oil_phase": {
+      "exact": 4,
+      "total": 4
+    },
+    "ph_condition": {
+      "exact": 4,
+      "total": 4
+    },
+    "droplet_size": {
+      "exact": 4,
+      "total": 4
+    },
+    "stability_observation": {
+      "exact": 4,
+      "total": 4
+    },
+    "magnetic_response": {
+      "exact": 4,
+      "total": 4
+    },
+    "cargo_release": {
+      "exact": 4,
+      "total": 4
+    }
+  },
+  "mismatches": [],
+  "limitation": "Small synthetic fixture scores measure software behaviour, not real-paper extraction accuracy or Claude performance."
+}
